@@ -21,7 +21,7 @@ onMounted(() => {
     let recWidth = width;
     let recHeight = height;
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
         ctx.strokeRect(x += 100, y += 40, recWidth -= 200, recHeight -= 80);
     }
 
@@ -50,7 +50,7 @@ onMounted(() => {
 
     ctx.shadowBlur = 0;
     ctx.fillStyle = "#0E0505"
-    ctx.fillRect(x + 1, y + 1, recWidth - 2, recHeight - 2);
+    ctx.fillRect(x += 84, y += 33, recWidth -= 169, recHeight -= 67);
 
     ctx.shadowBlur = 35;
     ctx.strokeRect(x, y, recWidth, recHeight);
@@ -60,12 +60,25 @@ onMounted(() => {
 <template>
     <canvas ref="canvas" :width="width" :height="height">
     </canvas>
-    <div>
+    <div :height="height" class="title">
         <h1>Some Text</h1>
     </div>
 </template>
 
 <style scoped lang="scss">
+.title {
+    margin-top: 300px;
+    text-align: center;
+
+    h1 {
+        font-family: IBM;
+        font-size: 98px;
+        color: #F3B829;
+        font-weight: 300;
+        text-shadow: 0 0 45px #F3B829;
+    }
+}
+
 canvas {
     position: absolute;
     top: 0;
