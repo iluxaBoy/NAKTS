@@ -1,9 +1,10 @@
 <script setup>
+import { onMounted, ref } from "vue";
 
 </script>
 
 <template>
-    <div>
+    <div class="main">
 
     </div>
 </template>

@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import MarqueeText from 'vue-marquee-text-component';
 
 const canvas = ref()
 const width = window.innerWidth - 6;
@@ -56,17 +57,40 @@ onMounted(() => {
 </script>
 
 <template>
-    <canvas ref="canvas" :width="width" :height="height">
-    </canvas>
-    <div :height="height" class="title">
-        <h1>NAKTS</h1>
-        <div class="box">
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae dolores vel at quaerat</p>
+    <div class="container">
+        <canvas ref="canvas" :width="width" :height="height">
+        </canvas>
+        <div :height="height" class="title">
+            <h1>NAKTS</h1>
+            <div class="box">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae dolores vel at quaerat</p>
+            </div>
         </div>
+        <marquee-text class="moving-text" :repeat="26" :duration="10">
+            <h1>Short text</h1>
+        </marquee-text>
     </div>
 </template>
 
 <style scoped lang="scss">
+.container {
+    overflow: hidden;
+}
+
+.moving-text {
+    height: 160px;
+    text-align: center;
+    font-family: IBM;
+    font-weight: 100;
+    color: #F68D18;
+    font-size: 2.6rem;
+
+    h1 {
+        margin-top: 50px;
+        text-shadow: 0 0 45px #f68e189d;
+    }
+}
+
 .title {
     display: flex;
     flex-direction: column;
