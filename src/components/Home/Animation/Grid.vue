@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 import MarqueeText from 'vue-marquee-text-component';
 
 const canvas = ref()
-const width = window.innerWidth - 6;
+const width = window.innerWidth - 16;
 const height = width / 2.5;
 
 const centerX = width / 2;
@@ -15,7 +15,6 @@ onMounted(() => {
     ctx.strokeStyle = "#F68D18";
     ctx.lineWidth = 3;
     ctx.shadowColor = "#F68D18";
-    ctx.shadowBlur = 15;
 
     let x = 0;
     let y = 0;
@@ -49,8 +48,6 @@ onMounted(() => {
 
     ctx.stroke();
 
-    ctx.shadowBlur = 0;
-    ctx.shadowBlur = 35;
     ctx.fillStyle = "#F68D18"
     ctx.fillRect(x += 84, y += 33, recWidth -= 169, recHeight -= 67);
 })
@@ -60,35 +57,25 @@ onMounted(() => {
     <div class="container">
         <canvas ref="canvas" :width="width" :height="height">
         </canvas>
-        <div :height="height" class="title">
+        <div class="title">
             <h1>NAKTS</h1>
             <div class="box">
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae dolores vel at quaerat</p>
             </div>
         </div>
-        <marquee-text class="moving-text" :repeat="26" :duration="10">
+        <marquee-text class="moving-text" :repeat="9" :duration="10">
             <h1>Short text</h1>
         </marquee-text>
     </div>
 </template>
 
 <style scoped lang="scss">
-.container {
-    overflow: hidden;
-}
-
-.moving-text {
-    height: 160px;
-    text-align: center;
-    font-family: IBM;
-    font-weight: 100;
-    color: #F68D18;
-    font-size: 2.6rem;
-
-    h1 {
-        margin-top: 50px;
-        text-shadow: 0 0 45px #f68e189d;
-    }
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: solid 3px #F68D18;
+    z-index: -1;
 }
 
 .title {
@@ -97,7 +84,7 @@ onMounted(() => {
     justify-content: space-between;
     width: 900px;
     height: 300px;
-    margin: 220px auto;
+    margin: 11.5vw auto;
     text-align: center;
     font-family: 'Silkscreen', sans-serif;
     font-size: 1.2rem;
@@ -119,13 +106,16 @@ onMounted(() => {
     }
 }
 
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: solid 3px #F68D18;
-    box-shadow: inset 0 0 18px #f68e189d,
-        0 0 18px #f68e189d;
-    z-index: -1;
+.moving-text {
+    height: 180px;
+    text-align: center;
+    font-family: IBM;
+    font-weight: 100;
+    color: #F68D18;
+    font-size: 2.6rem;
+
+    h1 {
+        margin-top: 50px;
+    }
 }
 </style>
