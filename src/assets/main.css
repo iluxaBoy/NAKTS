@@ -5,18 +5,31 @@
     src: url(src/assets/fonts/IBM-Logo.ttf);
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #F68D18;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #462806;
+}
+
 *,
 *::before,
 *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    box-shadow: none;
 }
 
 body {
     background-color: #0E0505;
 }
-
-/* button {
-    z-index: 2;
-} */

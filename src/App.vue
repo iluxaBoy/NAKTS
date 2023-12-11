@@ -3,7 +3,7 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="noise"><img src="src\assets\img\шум.png" alt=""></div>
+  <!-- <div class="noise"><img src="src\assets\img\шум.png" alt=""></div> -->
   <!-- <Loader /> -->
   <!-- <Grid /> -->
   <RouterView />
