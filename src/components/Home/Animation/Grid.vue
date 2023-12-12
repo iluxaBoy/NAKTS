@@ -1,16 +1,16 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import MarqueeText from 'vue-marquee-text-component';
 
 const canvas = ref()
-const width = window.innerWidth - 16;
-const height = width / 2.5;
+const width = ref(window.innerWidth - 16);
+const height = computed(() => width.value / 2.5);
 
-const centerX = width / 2;
-const centerY = height / 2;
+const centerX = computed(() => width.value / 2);
+const centerY = computed(() => height.value / 2);
 
-onMounted(() => {
-    let ctx = canvas.value.getContext("2d");
+const drawGrid = () => {
+    const ctx = canvas.value.getContext("2d");
 
     ctx.strokeStyle = "#F68D18";
     ctx.lineWidth = 3;
@@ -18,8 +18,8 @@ onMounted(() => {
 
     let x = 0;
     let y = 0;
-    let recWidth = width;
-    let recHeight = height;
+    let recWidth = width.value;
+    let recHeight = height.value;
 
     for (let i = 0; i < 2; i++) {
         ctx.strokeRect(x += 100, y += 40, recWidth -= 200, recHeight -= 80);
@@ -29,28 +29,40 @@ onMounted(() => {
 
     const createLines = (placement, position, amount, change) => {
         if (change) {
-            for (let i = 0; i <= position; i += position / amount) {
-                ctx.moveTo(placement, i);
-                ctx.lineTo(centerX, centerY);
-            }
+            createVerticalLines(placement, position, amount);
         } else {
-            for (let i = 0; i <= position; i += position / amount) {
-                ctx.moveTo(i, placement);
-                ctx.lineTo(centerX, centerY);
-            }
+            createHorizontalLines(placement, position, amount);
         }
     }
 
-    createLines(width, height, 6, true);
-    createLines(0, height, 6, true);
-    createLines(0, width, 10, false);
-    createLines(height, width, 10, false);
+    const createVerticalLines = (placement, position, amount) => {
+        for (let i = 0; i <= position; i += position / amount) {
+            ctx.moveTo(placement, i);
+            ctx.lineTo(centerX.value, centerY.value);
+        }
+    }
+
+    const createHorizontalLines = (placement, position, amount) => {
+        for (let i = 0; i <= position; i += position / amount) {
+            ctx.moveTo(i, placement);
+            ctx.lineTo(centerX.value, centerY.value);
+        }
+    }
+
+    createLines(width.value, height.value, 6, true);
+    createLines(0, height.value, 6, true);
+    createLines(0, width.value, 10, false);
+    createLines(height.value, width.value, 10, false);
 
     ctx.stroke();
 
     ctx.fillStyle = "#F68D18"
     ctx.fillRect(x += 84, y += 33, recWidth -= 169, recHeight -= 67);
-})
+}
+
+onMounted(() => {
+    drawGrid();
+});
 </script>
 
 <template>
@@ -74,7 +86,7 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
-    border: solid 3px #F68D18;
+    border: solid 3px var(--primary-color-home);
     z-index: -1;
 }
 
@@ -88,18 +100,18 @@ canvas {
     text-align: center;
     font-family: 'Silkscreen', sans-serif;
     font-size: 1.2rem;
-    color: #0E0505;
+    color: var(--secondary-color-home);
     font-weight: 600;
 
     .box {
         padding: 14px 42px;
-        border: 4px solid #0E0505;
+        border: 4px solid var(--secondary-color-home);
     }
 
     h1 {
         font-family: IBM;
         font-size: 9.6rem;
-        color: #0E0505;
+        color: var(--secondary-color-home);
         font-weight: 600;
         letter-spacing: -12px;
         transition: 0.8s;
@@ -111,7 +123,7 @@ canvas {
     text-align: center;
     font-family: IBM;
     font-weight: 100;
-    color: #F68D18;
+    color: var(--primary-color-home);
     font-size: 2.6rem;
 
     h1 {
