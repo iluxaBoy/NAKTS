@@ -2,12 +2,10 @@
 import { onMounted, ref } from "vue";
 
 const canvas1 = ref();
-const width1 = 500;
-const height1 = 250;
+const width = 500;
+const height = 250;
 
 const canvas2 = ref();
-const width2 = 500;
-const height2 = 250;
 
 onMounted(() => {
     const drawGraph = () => {
@@ -18,7 +16,6 @@ onMounted(() => {
         let frequency = .01;
         let phi = 0;
         let frames = 0;
-        let requestId;
 
         const Draw = () => {
             ctx.lineWidth = 4;
@@ -27,20 +24,20 @@ onMounted(() => {
             frames++
             phi = frames / 30;
 
-            ctx.clearRect(0, 0, width1, ch);
+            ctx.clearRect(0, 0, width, ch);
             ctx.beginPath();
 
-            for (let i = 0; i < width1; i++) {
+            for (let i = 0; i < width; i++) {
                 let y = Math.sin(i * frequency + phi) * amplitude / 2 + amplitude / 2;
                 ctx.lineTo(i, y + 40);
-                ctx.lineTo(i, y - 200);
+                ctx.lineTo(i, y - height);
             }
 
             ctx.stroke();
-            requestId = window.requestAnimationFrame(Draw);
+            window.requestAnimationFrame(Draw);
         }
 
-        requestId = window.requestAnimationFrame(Draw);
+        window.requestAnimationFrame(Draw);
     }
 
     const drawLoader = (y, temp) => {
@@ -48,9 +45,9 @@ onMounted(() => {
 
         let rW = 250;
         let rH = 30;
-        let x = 220;
+        let x = 210;
         let tempW = 0;
-        let requestId;
+
         ctx.lineWidth = 2;
         ctx.strokeStyle = "#F68D18";
         ctx.fillStyle = "#F68D18";
@@ -58,7 +55,7 @@ onMounted(() => {
         ctx.strokeRect(x, y, rW, rH);
 
         const Draw = () => {
-            requestId = setInterval(() => {
+            setInterval(() => {
                 if (tempW >= rW) {
                     ctx.clearRect(x + 1, y + 1, tempW - 2, rH - 2);
                     tempW = 0;
@@ -67,32 +64,84 @@ onMounted(() => {
             }, temp);
         }
 
-        requestId = window.requestAnimationFrame(Draw);
+        window.requestAnimationFrame(Draw);
     }
-    // debugger;
+
     drawGraph();
-    drawLoader(25, NaN, 4);
-    drawLoader(85, 20, 1);
+    drawLoader(25, 0, 4);
+    drawLoader(75, 20, 1);
     drawLoader(125, 90, 1);
 });
 </script>
 
 <template>
     <div class="container">
-        <div>
-            <canvas class="draw" ref="canvas1" :width="width1" :height="height1">
+        <div class="top">
+            <canvas class="draw" ref="canvas1" :width="width" :height="height">
             </canvas>
         </div>
-        <div>
-            <canvas ref="canvas2" :width="width2" :height="height2">
+        <div class="bottom">
+            <div class="text">
+                <div class="files">
+                    <div>
+                        <span>[1] Some File</span>
+                    </div>
+                    <div>
+                        <span ref="pros">0%</span>
+                    </div>
+                </div>
+                <div class="files">
+                    <div>
+                        <span>[1] Some File</span>
+                    </div>
+                    <div>
+                        <span ref="pros">0%</span>
+                    </div>
+                </div>
+                <div class="files">
+                    <div>
+                        <span>[1] Some File</span>
+                    </div>
+                    <div>
+                        <span ref="pros">0%</span>
+                    </div>
+                </div>
+            </div>
+            <canvas class="loader" ref="canvas2" :width="width" :height="height">
             </canvas>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
+.bottom {
+    position: relative;
+    width: 500px;
+
+    .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        .files {
+            display: flex;
+            justify-content: space-between;
+            margin: 18px 0;
+        }
+    }
+}
+
+.text {
+    color: #F68D18;
+}
+
 .draw {
     border: 3px solid #F68D18;
     background: #F68D18;
+}
+
+.loader {
+    position: absolute;
+    top: 0;
 }
 </style>
