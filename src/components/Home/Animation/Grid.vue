@@ -4,22 +4,21 @@ import MarqueeText from 'vue-marquee-text-component';
 
 const canvas = ref()
 const width = ref(window.innerWidth - 16);
-const height = computed(() => width.value / 2.5);
+const height = width.value / 2.5;
 
-const centerX = computed(() => width.value / 2);
-const centerY = computed(() => height.value / 2);
+const centerX = width.value / 2;
+const centerY = height / 2;
 
 const drawGrid = () => {
     const ctx = canvas.value.getContext("2d");
 
-    ctx.strokeStyle = "#F68D18";
-    ctx.lineWidth = 3;
-    ctx.shadowColor = "#F68D18";
-
     let x = 0;
     let y = 0;
     let recWidth = width.value;
-    let recHeight = height.value;
+    let recHeight = height;
+
+    ctx.strokeStyle = "#F68D18";
+    ctx.lineWidth = 3;
 
     for (let i = 0; i < 2; i++) {
         ctx.strokeRect(x += 100, y += 40, recWidth -= 200, recHeight -= 80);
@@ -38,21 +37,21 @@ const drawGrid = () => {
     const createVerticalLines = (placement, position, amount) => {
         for (let i = 0; i <= position; i += position / amount) {
             ctx.moveTo(placement, i);
-            ctx.lineTo(centerX.value, centerY.value);
+            ctx.lineTo(centerX, centerY);
         }
     }
 
     const createHorizontalLines = (placement, position, amount) => {
         for (let i = 0; i <= position; i += position / amount) {
             ctx.moveTo(i, placement);
-            ctx.lineTo(centerX.value, centerY.value);
+            ctx.lineTo(centerX, centerY);
         }
     }
 
-    createLines(width.value, height.value, 6, true);
-    createLines(0, height.value, 6, true);
+    createLines(width.value, height, 6, true);
+    createLines(0, height, 6, true);
     createLines(0, width.value, 10, false);
-    createLines(height.value, width.value, 10, false);
+    createLines(height, width.value, 10, false);
 
     ctx.stroke();
 
@@ -62,6 +61,12 @@ const drawGrid = () => {
 
 onMounted(() => {
     drawGrid();
+    window.addEventListener("resize", () => {
+        updateScreenWidth();
+    });
+    const updateScreenWidth = () => {
+        width.value = window.innerWidth;
+    }
 });
 </script>
 
@@ -76,7 +81,7 @@ onMounted(() => {
             </div>
         </div>
         <marquee-text class="moving-text" :repeat="9" :duration="10">
-            <h1> Short text </h1>
+            <h1>bigbrainMorestufflesspipi</h1>
         </marquee-text>
     </div>
 </template>

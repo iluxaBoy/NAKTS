@@ -16,6 +16,6 @@ import MovingCurves from "../components/Home/Animation/MovingCurves.vue";
 
 <style scoped lang="scss">
 section {
-  padding: 0 60px;
+  padding: 0 10vw;
 }
 </style>
