@@ -64,7 +64,7 @@ onMounted(() => {
             </div>
         </div>
         <marquee-text class="moving-text" :repeat="9" :duration="10">
-            <h1>Short text</h1>
+            <h1> Short text </h1>
         </marquee-text>
     </div>
 </template>
