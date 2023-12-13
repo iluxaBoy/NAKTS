@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref } from "vue";
 import MarqueeText from 'vue-marquee-text-component';
 
 const canvas = ref()
@@ -77,7 +77,7 @@ onMounted(() => {
         <div class="title">
             <h1>NAKTS</h1>
             <div class="box">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae dolores vel at quaerat</p>
+                <button>Some</button><button>Some</button><button>Some</button><button>Some</button>
             </div>
         </div>
         <marquee-text class="moving-text" :repeat="9" :duration="10">
@@ -109,6 +109,8 @@ canvas {
     font-weight: 600;
 
     .box {
+        display: flex;
+        justify-content: space-between;
         padding: 14px 42px;
         border: 4px solid var(--secondary-color-home);
     }
@@ -134,5 +136,14 @@ canvas {
     h1 {
         margin-top: 50px;
     }
+}
+
+button {
+    background-color: inherit;
+    border: none;
+    font-family: 'Silkscreen', sans-serif;
+    padding: 14px 24px;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 </style>
