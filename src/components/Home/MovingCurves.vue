@@ -140,9 +140,7 @@ onMounted(() => {
 .container {
     display: flex;
     justify-content: space-between;
-    color: #F68D18;
     font-family: 'Handjet', sans-serif;
-    font-size: 2rem;
 
     h1 {
         font-family: 'Silkscreen', sans-serif;
@@ -159,6 +157,10 @@ onMounted(() => {
         display: flex;
         flex-direction: column;
         max-width: 800px;
+
+        p {
+            margin-top: 14px;
+        }
     }
 }
 

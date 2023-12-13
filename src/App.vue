@@ -4,8 +4,6 @@ import { RouterView } from 'vue-router'
 
 <template>
   <!-- <div class="noise"><img src="src\assets\img\шум.png" alt=""></div> -->
-  <!-- <Loader /> -->
-  <!-- <Grid /> -->
   <RouterView />
 </template>
 
