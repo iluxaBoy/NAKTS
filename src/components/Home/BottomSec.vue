@@ -8,17 +8,18 @@ const width = window.innerWidth;
 const content = ref();
 const main = ref();
 
-let startAnimation = null;
+var startAnimation = null;
 
 const createBox = (x, y, z) => {
-
     const clone = main.value.cloneNode(true);
+
     clone.className = "box";
     clone.style.display = "block";
     clone.style.position = "absolute";
     clone.style.top = `${x}px`;
     clone.style.left = `${y}px`;
     clone.style.zIndex = z;
+
     content.value.appendChild(clone);
 }
 
@@ -49,7 +50,7 @@ onMounted(() => {
                 intervalId = null;
                 showBox.value = true;
             }
-        }, 100);
+        }, 200);
     }
 })
 </script>
@@ -74,7 +75,7 @@ onMounted(() => {
                         tenetur sequi minus dolore temporibus eos odio reiciendis!</p>
                     <div class="bottom">
                         <button>Continue</button>
-                        <button>Cansel</button>
+                        <button>Cancel</button>
                     </div>
                 </div>
             </div>
@@ -88,7 +89,8 @@ onMounted(() => {
     overflow: hidden;
     flex-direction: column;
     align-items: center;
-    padding: 65px 0 76px;
+    height: 660px;
+    padding: 65px 0 0;
     font-family: 'Handjet', sans-serif;
 
     .content {
@@ -107,6 +109,12 @@ onMounted(() => {
                 text-align: center;
                 background-color: var(--primary-color-home);
                 color: var(--secondary-color-home);
+
+                button {
+                    border: none;
+                    background-color: var(--primary-color-home);
+                    color: var(--secondary-color-home);
+                }
             }
 
             .mid {
@@ -124,6 +132,9 @@ onMounted(() => {
                     button {
                         padding: 12px 22px;
                         font-size: 1.7rem;
+                        border: none;
+                        background-color: var(--primary-color-home);
+                        color: var(--secondary-color-home);
                     }
                 }
             }
@@ -144,8 +155,9 @@ onMounted(() => {
 
     button {
         padding: 12px 22px;
-        background-color: var(--primary-color-home);
-        border: none;
+        background-color: var(--secondary-color-home);
+        border: 2px solid var(--primary-color-home);
+        color: var(--primary-color-home);
         font-family: 'Silkscreen', sans-serif;
         font-size: 2rem;
     }
