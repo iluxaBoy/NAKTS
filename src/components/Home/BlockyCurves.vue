@@ -146,7 +146,6 @@ onMounted(() => {
     }
 
     .info {
-        // margin-top: 46px;
         max-width: 800px;
     }
 }
