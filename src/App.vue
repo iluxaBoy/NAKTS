@@ -12,6 +12,7 @@ import { RouterView } from 'vue-router'
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0.06;
+  // opacity: 0.06;
+  mix-blend-mode: overlay;
 }
 </style>

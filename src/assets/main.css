@@ -39,9 +39,6 @@ body {
     font-size: 2rem;
 }
 
-/* h1 {
-    font-family: 'Silkscreen', sans-serif;
-    line-height: 40px;
-    font-size: 2.4rem;
-    font-weight: 700;
-} */
+button {
+    cursor: pointer;
+}

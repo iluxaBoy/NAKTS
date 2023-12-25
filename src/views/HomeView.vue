@@ -1,8 +1,9 @@
 <script setup>
 // import Loader from "../components/loader/Loader.vue";
 import Grid from "../components/Home/Grid.vue";
-import MovingCurves from "../components/Home/movingcurves.vue";
+import MovingCurves from "../components/Home/MovingCurves.vue";
 import BlockyCurves from "../components/Home/BlockyCurves.vue";
+import BottomSec from "../components/Home/BottomSec.vue";
 </script>
 
 <template>
@@ -13,6 +14,7 @@ import BlockyCurves from "../components/Home/BlockyCurves.vue";
       <MovingCurves />
       <BlockyCurves />
     </section>
+    <BottomSec />
   </main>
 </template>
 
