@@ -2,20 +2,18 @@
 import { onMounted, ref } from "vue";
 import MarqueeText from 'vue-marquee-text-component';
 
-const canvas = ref()
-const width = ref(window.innerWidth - 16);
-const height = width.value / 2.5;
-
-const centerX = width.value / 2;
-const centerY = height / 2;
+const canvas = ref();
 
 const drawGrid = () => {
     const ctx = canvas.value.getContext("2d");
 
+    const centerX = canvas.value.width / 2;
+    const centerY = canvas.value.height / 2;
+
     let x = 0;
     let y = 0;
-    let recWidth = width.value;
-    let recHeight = height;
+    let recWidth = canvas.value.width;
+    let recHeight = canvas.value.height;
 
     ctx.strokeStyle = "#F68D18";
     ctx.lineWidth = 3;
@@ -48,10 +46,10 @@ const drawGrid = () => {
         }
     }
 
-    createLines(width.value, height, 6, true);
-    createLines(0, height, 6, true);
-    createLines(0, width.value, 10, false);
-    createLines(height, width.value, 10, false);
+    createLines(canvas.value.width, canvas.value.height, 6, true);
+    createLines(0, canvas.value.height, 6, true);
+    createLines(0, canvas.value.width, 10, false);
+    createLines(canvas.value.height, canvas.value.width, 10, false);
 
     ctx.stroke();
 
@@ -59,20 +57,29 @@ const drawGrid = () => {
     ctx.fillRect(x += 84, y += 33, recWidth -= 169, recHeight -= 67);
 }
 
-onMounted(() => {
-    drawGrid();
+function onScreenResize() {
     window.addEventListener("resize", () => {
         updateScreenWidth();
+        drawGrid();
     });
-    const updateScreenWidth = () => {
-        width.value = window.innerWidth;
-    }
+}
+
+function updateScreenWidth() {
+    canvas.value.width = window.innerWidth - 16;
+    canvas.value.height = canvas.value.width / 2.5;
+}
+
+onMounted(() => {
+    updateScreenWidth();
+    onScreenResize();
+
+    drawGrid();
 });
 </script>
 
 <template>
     <div class="container">
-        <canvas ref="canvas" :width="width" :height="height">
+        <canvas ref="canvas">
         </canvas>
         <div class="title">
             <h1>NAKTS</h1>
