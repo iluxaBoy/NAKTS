@@ -4,8 +4,8 @@ import { onMounted, ref } from "vue";
 const canvas1 = ref();
 const canvas2 = ref();
 
-const width = 500;
-const height = 250;
+let width = 500;
+let height = 250;
 
 let pros1 = ref(0);
 let pros2 = ref(0);

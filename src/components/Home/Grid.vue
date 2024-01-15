@@ -126,7 +126,7 @@ canvas {
     justify-content: space-between;
     max-width: 900px;
     height: 300px;
-    margin: 11.5vw auto 9.5vw;
+    margin: 11.5vw auto 10.5vw;
     text-align: center;
     font-family: 'Silkscreen', sans-serif;
     font-size: 1.2rem;
@@ -169,7 +169,7 @@ canvas {
     .title {
         max-width: 600px;
         height: 200px;
-        margin: 12.5vw auto 10.5vw;
+        margin: 12.5vw auto 11.5vw;
 
         .box {
             button {
@@ -197,7 +197,7 @@ canvas {
     }
 
     .title {
-        margin-bottom: 3.5vw;
+        margin-bottom: 1.5vw;
 
         .box {
 
@@ -222,6 +222,29 @@ canvas {
     }
 }
 
+
+@media (max-width: 640px) {
+    .title {
+        max-width: 260px;
+        height: 150px;
+
+        .box {
+            button {
+                font-size: 0.9rem;
+                border-width: 2px;
+            }
+
+            button:last-of-type {
+                border-width: 2px;
+            }
+        }
+
+        h1 {
+            font-size: 3.9rem;
+        }
+    }
+}
+
 .moving-text {
     height: 180px;
     text-align: center;
@@ -239,6 +262,14 @@ canvas {
     .moving-text {
         h1 {
             font-size: 3.8rem;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .moving-text {
+        h1 {
+            font-size: 1.8rem;
         }
     }
 }
