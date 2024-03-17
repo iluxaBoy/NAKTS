@@ -1,9 +1,30 @@
 <script setup>
 // import Loader from "../components/loader/Loader.vue";
-import Grid from "../components/Home/Grid.vue";
-import MovingCurves from "../components/Home/MovingCurves.vue";
-import BlockyCurves from "../components/Home/BlockyCurves.vue";
-import BottomSec from "../components/Home/BottomSec.vue";
+import Grid from '../components/Home/Grid.vue'
+import MovingCurves from '../components/Home/MovingCurves.vue'
+import BlockyCurves from '../components/Home/BlockyCurves.vue'
+import BottomSec from '../components/Home/BottomSec.vue'
+
+// class for changeing size of canvas in other components
+class ChangeSize {
+  constructor(canvas) {
+    this.canvas = canvas
+  }
+  onScreenResize = () => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 762) {
+        this.updateScreenWidth()
+      } else {
+        this.canvas.value.width = 500
+        this.canvas.value.height = 250
+      }
+    })
+  }
+  updateScreenWidth = () => {
+    this.canvas.value.width = 250
+    this.canvas.value.height = 125
+  }
+}
 </script>
 
 <template>
@@ -11,8 +32,8 @@ import BottomSec from "../components/Home/BottomSec.vue";
     <!-- <Loader /> -->
     <Grid />
     <section>
-      <MovingCurves />
-      <BlockyCurves />
+      <MovingCurves :ChangeSize="ChangeSize" />
+      <BlockyCurves :ChangeSize="ChangeSize" />
     </section>
     <BottomSec />
   </main>
@@ -20,10 +41,15 @@ import BottomSec from "../components/Home/BottomSec.vue";
 
 <style scoped lang="scss">
 * {
-  color: #F68D18;
+  color: #f68d18;
 }
 
 section {
   padding: 0 10vw;
+  margin-top: 36px;
+}
+
+section > * {
+  margin-bottom: 172px;
 }
 </style>
