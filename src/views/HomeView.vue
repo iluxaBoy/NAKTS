@@ -5,6 +5,8 @@ import MovingCurves from '../components/Home/MovingCurves.vue'
 import BlockyCurves from '../components/Home/BlockyCurves.vue'
 import BottomSec from '../components/Home/BottomSec.vue'
 
+let mobile = 762
+
 // class for changeing size of canvas in other components
 class ChangeSize {
   constructor(canvas) {
@@ -32,8 +34,8 @@ class ChangeSize {
     <!-- <Loader /> -->
     <Grid />
     <section>
-      <MovingCurves :ChangeSize="ChangeSize" />
-      <BlockyCurves :ChangeSize="ChangeSize" />
+      <MovingCurves :ChangeSize="ChangeSize" :mobile="mobile" />
+      <BlockyCurves :ChangeSize="ChangeSize" :mobile="mobile" />
     </section>
     <BottomSec />
   </main>

@@ -1,22 +1,28 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 
+//two canvas for more easier work with visuals
 const canvas1 = ref()
 const canvas2 = ref()
 
 const props = defineProps({
   ChangeSize: {
     type: Object
+  },
+  mobile: {
+    type: Number
   }
 })
 
-let mobile = 762
+//var for "removing" second canvas
 let ifMobile = false
 
+//vars for showing percentage
 let pros1 = ref(0)
 let pros2 = ref(0)
 let pros3 = ref(0)
 
+//fun to draw graf
 const drawGraph = () => {
   const ctx = canvas1.value.getContext('2d')
 
@@ -50,6 +56,7 @@ const drawGraph = () => {
   window.requestAnimationFrame(Draw)
 }
 
+//fun to draw loaders
 const drawLoader = (y, frame, pros) => {
   const ctx = canvas2.value.getContext('2d')
 
@@ -82,9 +89,10 @@ const drawLoader = (y, frame, pros) => {
   window.requestAnimationFrame(Draw)
 }
 
+//fun to check if web was loaded on smaller screen
 const checkIfMobile = () => {
-  if (window.innerWidth <= mobile) {
-    change1.updateScreenWidth()
+  if (window.innerWidth <= props.mobile) {
+    change.updateScreenWidth()
     ifMobile = true
 
     drawGraph()
@@ -98,19 +106,22 @@ const checkIfMobile = () => {
   }
 }
 
-const change1 = new props.ChangeSize(canvas1)
+const change = new props.ChangeSize(canvas1)
 
 onMounted(() => {
   checkIfMobile()
 
-  change1.onScreenResize()
+  change.onScreenResize()
 
-  canvas1.value.width = change1.canvas.value.width
-  canvas1.value.height = change1.canvas.value.height
+  canvas1.value.width = change.canvas.value.width
+  canvas1.value.height = change.canvas.value.height
+  canvas2.value.width = change.canvas.value.width
+  canvas2.value.height = change.canvas.value.height
 
+  //fun to check on resize and "remove" second canvas
   window.addEventListener('resize', () => {
     drawGraph()
-    if (window.innerWidth <= mobile) ifMobile = true
+    if (window.innerWidth <= props.mobile) ifMobile = true
     else ifMobile = false
   })
 
@@ -265,13 +276,22 @@ onMounted(() => {
     flex-direction: column;
     justify-content: space-between;
     height: 140px;
-    padding-top: 15px;
+    padding-top: 14px;
     font-size: 24px;
 
     .files {
       display: flex;
       justify-content: space-between;
       text-align: end;
+    }
+  }
+}
+
+@media (max-width: 762px) {
+  .bottom {
+    .text {
+      height: 100px;
+      font-size: 18px;
     }
   }
 }
