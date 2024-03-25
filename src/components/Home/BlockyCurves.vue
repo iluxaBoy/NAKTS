@@ -6,12 +6,11 @@ const canvas = ref()
 const props = defineProps({
   ChangeSize: {
     type: Object
+  },
+  mobile: {
+    type: Number
   }
 })
-
-// make availeble to chenge size when for responsivnes
-let width
-let height
 
 const drawGraph = () => {
   const ctx = canvas.value.getContext('2d')
@@ -28,9 +27,9 @@ const drawGraph = () => {
     frames++
     phi = frames / 30
 
-    ctx.clearRect(0, 0, width, height)
+    ctx.clearRect(0, 0, canvas.value.width, canvas.value.height)
 
-    for (let i = 0; i < width - 25; i += 40) {
+    for (let i = 0; i < canvas.value.width - 25; i += 40) {
       let y = (Math.sin(i * frequency + phi) * amplitude) / 2 + amplitude / 2
       ctx.strokeRect(i + 25, y + 15, 25, 30)
     }
@@ -42,8 +41,8 @@ const drawGraph = () => {
 }
 
 onMounted(() => {
-  width = canvas.value.width = '500'
-  height = canvas.value.height = '250'
+  canvas.value.width = 500
+  canvas.value.height = 250
 
   drawGraph()
 })
