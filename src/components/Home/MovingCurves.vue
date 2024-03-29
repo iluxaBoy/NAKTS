@@ -91,19 +91,9 @@ const drawLoader = (y, frame, pros) => {
 
 //fun to check if web was loaded on smaller screen
 const checkIfMobile = () => {
-  if (window.innerWidth <= props.mobile) {
-    change.updateScreenWidth()
-    ifMobile = true
-
-    drawGraph()
-  } else {
-    canvas1.value.width = 500
-    canvas1.value.height = 250
-    canvas2.value.width = 500
-    canvas2.value.height = 250
-
-    ifMobile = false
-  }
+  change.checkScreen()
+  ifMobile = change.mobile
+  drawGraph()
 }
 
 const change = new props.ChangeSize(canvas1)
@@ -120,9 +110,13 @@ onMounted(() => {
 
   //fun to check on resize and "remove" second canvas
   window.addEventListener('resize', () => {
-    drawGraph()
-    if (window.innerWidth <= props.mobile) ifMobile = true
-    else ifMobile = false
+    if (window.innerWidth <= props.mobile) {
+      drawGraph()
+      ifMobile = true
+    } else {
+      drawGraph()
+      ifMobile = false
+    }
   })
 
   drawGraph()

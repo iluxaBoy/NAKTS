@@ -12,6 +12,8 @@ const props = defineProps({
   }
 })
 
+let ifMobile = false
+
 const drawGraph = () => {
   const ctx = canvas.value.getContext('2d')
 
@@ -19,9 +21,20 @@ const drawGraph = () => {
   let frequency = 0.01
   let phi = 0
   let frames = 0
+  let ampChange = 2
+
+  let width = 25
+  let height = 30
 
   ctx.lineWidth = 2
   ctx.strokeStyle = '#F68D18'
+
+  if (ifMobile) {
+    amplitude = 50
+    width = 18
+    height = 23
+    ampChange = 1.5
+  }
 
   const Draw = () => {
     frames++
@@ -30,8 +43,8 @@ const drawGraph = () => {
     ctx.clearRect(0, 0, canvas.value.width, canvas.value.height)
 
     for (let i = 0; i < canvas.value.width - 25; i += 40) {
-      let y = (Math.sin(i * frequency + phi) * amplitude) / 2 + amplitude / 2
-      ctx.strokeRect(i + 25, y + 15, 25, 30)
+      let y = (Math.sin(i * frequency + phi) * amplitude) / 2 + amplitude / ampChange
+      ctx.strokeRect(i + width, y + 15, width, height)
     }
 
     window.requestAnimationFrame(Draw)
@@ -40,9 +53,30 @@ const drawGraph = () => {
   window.requestAnimationFrame(Draw)
 }
 
+const checkIfMobile = () => {
+  change.checkScreen()
+  ifMobile = change.mobile
+  drawGraph()
+}
+
+const change = new props.ChangeSize(canvas)
+
 onMounted(() => {
-  canvas.value.width = 500
-  canvas.value.height = 250
+  checkIfMobile()
+
+  change.onScreenResize()
+
+  canvas.value.width = change.canvas.value.width
+  canvas.value.height = change.canvas.value.height
+
+  window.addEventListener('resize', () => {
+    drawGraph()
+    if (window.innerWidth <= props.mobile) {
+      ifMobile = true
+    } else {
+      ifMobile = false
+    }
+  })
 
   drawGraph()
 })
@@ -57,9 +91,9 @@ onMounted(() => {
             <li>0</li>
             <li>1</li>
             <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
+            <li class="desk-top">3</li>
+            <li class="desk-top">4</li>
+            <li class="desk-top">5</li>
           </ul>
         </div>
         <div class="bottom">
@@ -70,11 +104,11 @@ onMounted(() => {
             <li>3</li>
             <li>4</li>
             <li>5</li>
-            <li>6</li>
-            <li>7</li>
-            <li>8</li>
-            <li>9</li>
-            <li>10</li>
+            <li class="desk-top">6</li>
+            <li class="desk-top">7</li>
+            <li class="desk-top">8</li>
+            <li class="desk-top">9</li>
+            <li class="desk-top">10</li>
           </ul>
         </div>
       </div>
@@ -203,5 +237,44 @@ canvas {
   top: 0;
   right: 0;
   border: 3px solid #f68d18;
+}
+
+@media (max-width: 762px) {
+  .container {
+    .animation {
+      .diagram {
+        margin: auto;
+        width: 244px;
+        font-size: 18px;
+        .left {
+          padding-top: 18px;
+          ul {
+            height: 84px;
+          }
+        }
+      }
+    }
+    .desk-top {
+      display: none;
+    }
+    .diagram-info {
+      max-width: 364px;
+      font-size: 18px;
+    }
+    .info {
+      max-width: 462px;
+      h1 {
+        font-size: 1.4rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  canvas {
+    top: 0;
+    right: 15%;
+  }
 }
 </style>
