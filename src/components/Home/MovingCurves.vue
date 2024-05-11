@@ -62,7 +62,7 @@ const drawLoader = (y, frame, pros) => {
 
   let recWidth = 250
   let recHeight = 30
-  let x = canvas1.value.width / 3.5
+  let x = canvas2.value.width / 3.5
   let tempW = 0
 
   ctx.lineWidth = 2
@@ -105,8 +105,9 @@ onMounted(() => {
 
   canvas1.value.width = change.canvas.value.width
   canvas1.value.height = change.canvas.value.height
-  canvas2.value.width = change.canvas.value.width
-  canvas2.value.height = change.canvas.value.height
+  //canvas2 has static size because it shows only at certain width
+  canvas2.value.width = 500
+  canvas2.value.height = 250
 
   //fun to check on resize and "remove" second canvas
   window.addEventListener('resize', () => {

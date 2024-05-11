@@ -1,44 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Handjet:wght@100;200;300;400;500;600;700;800;900&family=Silkscreen:wght@400;700&display=swap');
 
 :root {
-    --primary-color-home: #F68D18;
-    --secondary-color-home: #0E0505;
+  --primary-color-home: #f68d18;
+  --secondary-color-home: #0e0505;
 }
 
 @font-face {
-    font-family: IBM;
-    src: url(src/assets/fonts/IBM-Logo.ttf);
+  font-family: IBM;
+  src: url(src/assets/fonts/IBM-Logo.ttf);
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    display: none;
+  display: none;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #F68D18;
+  background: #f68d18;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #462806;
+  background: #462806;
 }
 
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: var(--secondary-color-home);
-    font-size: 2rem;
+  background-color: var(--secondary-color-home);
+  font-size: 2rem;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
