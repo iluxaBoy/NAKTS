@@ -67,4 +67,8 @@ section {
 section > * {
   margin-bottom: 172px;
 }
+
+main {
+  overflow: hidden;
+}
 </style>

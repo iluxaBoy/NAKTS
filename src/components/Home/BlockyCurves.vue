@@ -13,6 +13,8 @@ const props = defineProps({
 })
 
 let ifMobile = false
+const verticalCount = ref(5)
+const horisontalCount = ref(10)
 
 const drawGraph = () => {
   const ctx = canvas.value.getContext('2d')
@@ -56,6 +58,10 @@ const drawGraph = () => {
 const checkIfMobile = () => {
   change.checkScreen()
   ifMobile = change.mobile
+  if (ifMobile) {
+    verticalCount.value = 3
+    horisontalCount.value = 5
+  }
   drawGraph()
 }
 
@@ -73,8 +79,12 @@ onMounted(() => {
     drawGraph()
     if (window.innerWidth <= props.mobile) {
       ifMobile = true
+      verticalCount.value = 3
+      horisontalCount.value = 5
     } else {
       ifMobile = false
+      verticalCount.value = 5
+      horisontalCount.value = 10
     }
   })
 
@@ -88,27 +98,12 @@ onMounted(() => {
       <div class="diagram">
         <div class="left">
           <ul>
-            <li>0</li>
-            <li>1</li>
-            <li>2</li>
-            <li class="desk-top">3</li>
-            <li class="desk-top">4</li>
-            <li class="desk-top">5</li>
+            <li v-for="n in verticalCount">{{ n }}</li>
           </ul>
         </div>
         <div class="bottom">
           <ul>
-            <li>0</li>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li class="desk-top">6</li>
-            <li class="desk-top">7</li>
-            <li class="desk-top">8</li>
-            <li class="desk-top">9</li>
-            <li class="desk-top">10</li>
+            <li v-for="n in horisontalCount">{{ n }}</li>
           </ul>
         </div>
       </div>

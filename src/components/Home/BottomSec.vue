@@ -4,17 +4,18 @@ import { onMounted, ref } from 'vue'
 let showBox = ref(false)
 let removeBtn = ref(false)
 
-// make availeble to chenge size when for responsivnes
-const width = window.innerWidth
 const content = ref()
 const main = ref()
 
+let intervalId = null
+
 var startAnimation = null
+var closeAllBox = null
 
 const createBox = (x, y, z) => {
   const clone = main.value.cloneNode(true)
 
-  clone.className = 'box'
+  clone.className = 'box clone'
   clone.style.display = 'block'
   clone.style.position = 'absolute'
   clone.style.top = `${x}px`
@@ -25,21 +26,41 @@ const createBox = (x, y, z) => {
 }
 
 const createAnimation = () => {
+  const width = window.innerWidth
+
   let x = 0
-  let y = 0
+  let y = main.value.style.width
   let z = 0
 
   x = Math.floor(Math.random() * (100 - -50) + -50)
-  y = Math.floor(Math.random() * width - 1000)
+  y = Math.floor(Math.random() * width - main.value.style.width - 300)
   z--
+  console.log(x, y, z)
   createBox(x, y, z)
 }
 
-onMounted(() => {
+const loadDOMfun = () => {
+  closeAllBox = () => {
+    const select = document.querySelectorAll('.clone')
+
+    let index = 0
+
+    intervalId = setInterval(() => {
+      if (index !== 6) {
+        select[index].remove()
+        index++
+      } else {
+        clearInterval(intervalId)
+        intervalId = null
+
+        showBox.value = false
+        removeBtn.value = false
+      }
+    }, 200)
+  }
   startAnimation = () => {
     removeBtn.value = true
-    window.scrollPosition = 100
-    let intervalId = null
+
     let index = 0
 
     intervalId = setInterval(() => {
@@ -49,21 +70,26 @@ onMounted(() => {
       } else {
         clearInterval(intervalId)
         intervalId = null
+
         showBox.value = true
       }
     }, 200)
   }
+}
+
+onMounted(() => {
+  loadDOMfun()
 })
 </script>
 
 <template>
   <div class="container">
-    <button v-if="!removeBtn" @click="startAnimation()">Some text</button>
+    <button class="activ-btn" v-show="!removeBtn" @click="startAnimation()">Some text</button>
     <div ref="content" class="content">
       <div v-show="showBox" ref="main" class="box main">
         <div class="top">
           <h3>Info</h3>
-          <button>X</button>
+          <button @click="closeAllBox()">X</button>
         </div>
         <div class="mid">
           <h1>Some Main Text</h1>
@@ -76,7 +102,7 @@ onMounted(() => {
           </p>
           <div class="bottom">
             <button>Continue</button>
-            <button>Cancel</button>
+            <button @click="closeAllBox()">Cancel</button>
           </div>
         </div>
       </div>
@@ -87,13 +113,13 @@ onMounted(() => {
 <style scoped lang="scss">
 .container {
   display: flex;
-  overflow: hidden;
   flex-direction: column;
-  align-items: center;
-  height: 660px;
+  min-height: 660px;
   padding: 35px 0 0;
   font-family: 'Handjet', sans-serif;
-
+  .activ-btn {
+    margin: 0 auto;
+  }
   .content {
     position: relative;
 
@@ -101,7 +127,6 @@ onMounted(() => {
       width: 1000px;
       background-color: var(--secondary-color-home);
       border: 4px solid var(--primary-color-home);
-
       .top {
         display: flex;
         justify-content: space-between;
@@ -161,6 +186,55 @@ onMounted(() => {
     color: var(--primary-color-home);
     font-family: 'Silkscreen', sans-serif;
     font-size: 2rem;
+  }
+
+  @media (max-width: 1100px) {
+    .content {
+      .box {
+        width: 600px;
+        .top {
+          height: 44px;
+          button {
+            padding: 0;
+          }
+        }
+        p {
+          font-size: 1.2rem;
+        }
+        h3 {
+          font-size: 1.8rem;
+        }
+        .mid {
+          padding: 14px 36px;
+          .bottom {
+            button {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+    h1 {
+      font-size: 1.9rem;
+    }
+  }
+  @media (max-width: 644px) {
+    .content {
+      .box {
+        width: 300px;
+        .mid {
+          .bottom {
+            flex-direction: column;
+            align-items: start;
+            button {
+              margin: 4px;
+              padding: 8px;
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>
