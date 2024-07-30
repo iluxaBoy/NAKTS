@@ -13,9 +13,11 @@ const props = defineProps({
 })
 
 let ifMobile = false
+
 const verticalCount = ref(5)
 const horisontalCount = ref(10)
 
+//fun for drawing blocky graph
 const drawGraph = () => {
   const ctx = canvas.value.getContext('2d')
 
@@ -94,7 +96,7 @@ onMounted(() => {
 
 <template>
   <div class="container">
-    <div class="animation">
+    <section class="animation">
       <div class="diagram">
         <div class="left">
           <ul>
@@ -115,8 +117,8 @@ onMounted(() => {
           <li>&#60;-Lorem ipsum dolor sit amet consectetur adipisicing.</li>
         </ul>
       </div>
-    </div>
-    <div class="info">
+    </section>
+    <section class="info">
       <h1>Lorem ipsum dolor sit amet.</h1>
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam temporibus adipisci aliquam
@@ -125,7 +127,7 @@ onMounted(() => {
         quia delectus consequatur perferendis voluptas nemo dolor, eius labore dolorem eveniet
         natus.
       </p>
-    </div>
+    </section>
   </div>
 </template>
 

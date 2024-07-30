@@ -129,7 +129,7 @@ onMounted(() => {
 
 <template>
   <div class="container">
-    <div class="animation">
+    <section class="animation">
       <div class="top">
         <canvas class="draw" ref="canvas1"> </canvas>
       </div>
@@ -162,8 +162,8 @@ onMounted(() => {
           </div>
         </div>
       </div>
-    </div>
-    <div class="info">
+    </section>
+    <section class="info">
       <h1>Worem ipsum doWor sit amet</h1>
       <h1>Worem ipsum doWor sit amet</h1>
       <h1>Worem ipsum doWor sit amet</h1>
@@ -174,7 +174,7 @@ onMounted(() => {
         eum doloremque, dolor praesentium esse vel. Nihil architecto possimus praesentium quia enim
         dolorum inventore.
       </p>
-    </div>
+    </section>
   </div>
 </template>
 
