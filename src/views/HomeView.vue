@@ -54,9 +54,9 @@ class ChangeSize {
   </main>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 * {
-  color: #f68d18;
+  color: var(--primary-color-home);
 }
 
 section {

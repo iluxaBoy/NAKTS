@@ -9,9 +9,7 @@ const main = ref()
 
 let intervalId = null
 
-var startAnimation = null
-var closeAllBox = null
-
+//fun for cloining and creating boxes
 const createBox = (x, y, z) => {
   const clone = main.value.cloneNode(true)
 
@@ -25,6 +23,7 @@ const createBox = (x, y, z) => {
   content.value.appendChild(clone)
 }
 
+//creates random plaisment in content div
 const createAnimation = () => {
   const width = window.innerWidth
 
@@ -35,51 +34,46 @@ const createAnimation = () => {
   x = Math.floor(Math.random() * (100 - -50) + -50)
   y = Math.floor(Math.random() * width - main.value.style.width - 300)
   z--
-  console.log(x, y, z)
+
   createBox(x, y, z)
 }
 
-const loadDOMfun = () => {
-  closeAllBox = () => {
-    const select = document.querySelectorAll('.clone')
+const closeAllBox = () => {
+  const select = document.querySelectorAll('.clone')
 
-    let index = 0
+  let index = 0
 
-    intervalId = setInterval(() => {
-      if (index !== 6) {
-        select[index].remove()
-        index++
-      } else {
-        clearInterval(intervalId)
-        intervalId = null
+  intervalId = setInterval(() => {
+    if (index !== 6) {
+      select[index].remove()
+      index++
+    } else {
+      clearInterval(intervalId)
+      intervalId = null
 
-        showBox.value = false
-        removeBtn.value = false
-      }
-    }, 200)
-  }
-  startAnimation = () => {
-    removeBtn.value = true
-
-    let index = 0
-
-    intervalId = setInterval(() => {
-      if (index !== 6) {
-        createAnimation()
-        index++
-      } else {
-        clearInterval(intervalId)
-        intervalId = null
-
-        showBox.value = true
-      }
-    }, 200)
-  }
+      showBox.value = false
+      removeBtn.value = false
+    }
+  }, 200)
 }
 
-onMounted(() => {
-  loadDOMfun()
-})
+const startAnimation = () => {
+  removeBtn.value = true
+
+  let index = 0
+
+  intervalId = setInterval(() => {
+    if (index !== 6) {
+      createAnimation()
+      index++
+    } else {
+      clearInterval(intervalId)
+      intervalId = null
+
+      showBox.value = true
+    }
+  }, 200)
+}
 </script>
 
 <template>

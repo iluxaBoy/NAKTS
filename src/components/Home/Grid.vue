@@ -84,7 +84,7 @@ const onScreenResize = () => {
 
 //fun to change canvas width and height
 const updateScreenWidth = () => {
-  canvas.value.width = window.innerWidth - 16
+  canvas.value.width = window.innerWidth - 6
   canvas.value.height = canvas.value.width / 2.5
 }
 
@@ -102,11 +102,13 @@ onMounted(() => {
     <div class="title">
       <h1>NAKTS</h1>
       <div class="box">
-        <button>Home</button><button>About</button><button>Info</button><button>Sub</button>
+        <button><RouterLink to="/">Home</RouterLink></button
+        ><button><RouterLink to="/about">About</RouterLink></button><button>Info</button
+        ><button>Sub</button>
       </div>
     </div>
     <marquee-text class="moving-text" :repeat="9" :duration="10">
-      <h1>bigbrainMorestufflesspipi</h1>
+      <h1>thistextmeansnothing</h1>
     </marquee-text>
   </div>
 </template>
